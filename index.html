@@ -309,14 +309,40 @@ html[lang="zh-Hans"] .tm.big blockquote{font-family:"Noto Sans SC",sans-serif;li
 /* Contact */
 .contact-g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:start}
 .contact-g .l{display:grid;gap:22px}
-.cinfo{margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.cinfo > div{background:var(--char);padding:16px 18px;min-width:0}
-.cinfo > div:first-child{grid-column:1/-1}
+.cinfo{margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cinfo > div{background:var(--char);padding:14px 18px;min-width:0;display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:9px;align-items:start}
+.cinfo .si{grid-row:1/3;grid-column:1;width:18px;height:18px;color:var(--gold);margin-top:1px}
+.cinfo dt,.cinfo dd{grid-column:2}
 .cinfo dt{font:600 .7rem/1.4 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-.cinfo dd{margin:6px 0 0;overflow-wrap:anywhere}
+.cinfo dd{margin:4px 0 0;overflow-wrap:anywhere}
 .cinfo .tbc{color:var(--muted);font-style:italic}
 .cinfo .walink{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
-@media (max-width:420px){.cinfo{grid-template-columns:1fr}}
+.maplink,.maillink{color:inherit;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+.maplink:hover,.maillink:hover{color:var(--gold);text-decoration-color:var(--gold)}
+.cinfo .walink{color:var(--gold)}
+.foot a.ci-l{display:inline-flex;align-items:flex-start;gap:9px}
+.foot a.ci-l .si{margin-top:calc((1.6em - 18px) / 2);color:var(--gold)}
+/* Map chooser */
+.mp{position:fixed;inset:0;z-index:90;visibility:hidden;transition:visibility 0s .3s}
+.mp.open{visibility:visible;transition:none}
+.mp-bd{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .3s}
+.mp.open .mp-bd{opacity:1}
+.mp-panel{position:absolute;width:min(340px,calc(100vw - 24px));background:var(--char-2);color:var(--bone);border:1px solid var(--line-2);border-radius:var(--r);padding:16px;box-shadow:0 18px 50px rgba(0,0,0,.55);opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
+.mp.open .mp-panel{opacity:1;transform:none}
+.mp-panel h2{font:600 .75rem/1.4 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+.mp-addr{margin:0 0 12px;font-size:.88rem;line-height:1.5;color:var(--bone-2)}
+.mp-list{display:grid;gap:8px}
+.mp-opt,.mp-cancel{display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;border-radius:999px;font:600 .95rem/1 var(--f-body);text-decoration:none;cursor:pointer;border:1px solid var(--line-2);background:var(--char-3);color:var(--bone);transition:background .2s,color .2s,border-color .2s}
+.mp-opt:hover,.mp-cancel:hover{border-color:var(--gold);color:var(--gold)}
+.mp-opt[hidden]{display:none}
+.mp-cancel{width:100%;margin-top:8px;background:transparent}
+.mp :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (max-width:640px){
+  .mp-panel{left:0!important;right:0;top:auto!important;bottom:0;width:auto;border-radius:22px 22px 0 0;border-width:1px 0 0;padding:12px var(--gr) calc(20px + env(safe-area-inset-bottom,0px)) var(--gl);opacity:1;transform:translateY(105%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+  .mp.open .mp-panel{transform:none}
+  .mp-panel::before{content:"";display:block;width:44px;height:4px;border-radius:4px;background:var(--line-2);margin:4px auto 14px}
+}
+@media (prefers-reduced-motion:reduce){.mp-panel,.mp-bd{transition:none}}
 form.book{display:grid;gap:18px;background:var(--char-2);border:1px solid var(--line-2);border-radius:calc(var(--r) * 1.5);padding:clamp(20px,3vw,40px)}
 form.book h3{font-size:clamp(1.4rem,2.2vw,1.9rem);text-transform:uppercase}
 html[lang="zh-Hans"] form.book h3{text-transform:none}
@@ -589,11 +615,11 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
         <h2 class="h2" data-i18n="ct.title">Book a free consultation</h2>
         <p class="sub" data-i18n="ct.lede">Leave your details and a Home Style Consultant will contact you to arrange a visit.</p>
         <dl class="cinfo">
-          <div><dt data-i18n="ct.office">Office</dt><dd>SVS RENOZ MY SDN BHD<br><span data-i18n="ct.addr">17-1, Jalan Tengah, Cheras Selatan 118, 43200 Cheras, Selangor</span></dd></div>
-          <div><dt>WhatsApp</dt><dd><a class="walink" id="waLink" href="https://wa.me/60107614877" target="_blank" rel="noopener">+60 10-761 4877</a></dd></div>
-          <div><dt data-i18n="ct.phone">Office line</dt><dd>03-7782 2888</dd></div>
-          <div><dt data-i18n="ct.email">Email</dt><dd>svs.renoz@gmail.com</dd></div>
-          <div><dt data-i18n="ct.hours">Opening hours</dt><dd data-i18n="ct.hoursv">Open daily, 10am – 8pm</dd></div>
+          <div><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="9.8" r="2.4"/></svg><dt data-i18n="ct.office">Office</dt><dd>SVS RENOZ MY SDN BHD<br><a class="maplink" data-map href="https://www.google.com/maps/search/?api=1&amp;query=17-1%2C%20Jalan%20Tengah%2C%20Cheras%20Selatan%20118%2C%2043200%20Cheras%2C%20Selangor" aria-haspopup="dialog"><span data-i18n="ct.addr">17-1, Jalan Tengah, Cheras Selatan 118, 43200 Cheras, Selangor</span></a></dd></div>
+          <div><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4 20l1.3-4.2A8 8 0 1 1 8.300 18.800z"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9.200 8.800c.2 2.800 2.600 5.300 5.800 6l1-1.400-1.900-1-.9.700c-.9-.4-1.700-1.200-2.100-2.100l.7-.9-1-1.900z"/></svg><dt>WhatsApp</dt><dd><a class="walink" id="waLink" href="https://wa.me/60107614877" target="_blank" rel="noopener">+60 10-761 4877</a></dd></div>
+          <div><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M6.6 3.8h2.7l1.4 3.7-1.8 1.2a11 11 0 0 0 5.4 5.4l1.2-1.8 3.7 1.4v2.7a2 2 0 0 1-2.2 2c-7.3-.5-13-6.200-13.500-13.500a2 2 0 0 1 2-2z"/></svg><dt data-i18n="ct.phone">Office line</dt><dd><a class="walink" href="tel:+60377822888">03-7782 2888</a></dd></div>
+          <div><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m4.5 7.5 7.5 6 7.5-6"/></svg><dt data-i18n="ct.email">Email</dt><dd><a class="maillink walink" data-mail href="mailto:svs.renoz@gmail.com?subject=Renovation%20enquiry">svs.renoz@gmail.com</a></dd></div>
+          <div><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><circle fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="12" r="8.5"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 7.500V12l3 2"/></svg><dt data-i18n="ct.hours">Opening hours</dt><dd data-i18n="ct.hoursv">Open daily, 10am – 8pm</dd></div>
         </dl>
       </div>
       <form class="book rv" id="bookForm" novalidate>
@@ -688,8 +714,9 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
         <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
       </ul></div>
       <div><h3 data-i18n="ft.visit">Visit us</h3><ul>
-        <li data-i18n="ct.addr">17-1, Jalan Tengah, Cheras Selatan 118, 43200 Cheras, Selangor</li>
-        <li>svs.renoz@gmail.com</li>
+        <li><a class="maplink ci-l" data-map href="https://www.google.com/maps/search/?api=1&amp;query=17-1%2C%20Jalan%20Tengah%2C%20Cheras%20Selatan%20118%2C%2043200%20Cheras%2C%20Selangor" aria-haspopup="dialog"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="9.8" r="2.4"/></svg><span data-i18n="ct.addr">17-1, Jalan Tengah, Cheras Selatan 118, 43200 Cheras, Selangor</span></a></li>
+        <li><a class="ci-l" href="tel:+60377822888"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M6.6 3.8h2.7l1.4 3.7-1.8 1.2a11 11 0 0 0 5.4 5.4l1.2-1.8 3.7 1.4v2.7a2 2 0 0 1-2.2 2c-7.3-.5-13-6.200-13.500-13.500a2 2 0 0 1 2-2z"/></svg>03-7782 2888</a></li>
+        <li><a class="maillink ci-l" data-mail href="mailto:svs.renoz@gmail.com?subject=Renovation%20enquiry"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m4.5 7.5 7.5 6 7.5-6"/></svg>svs.renoz@gmail.com</a></li>
       </ul></div>
       <div><h3 data-i18n="ft.follow">Follow us</h3><ul>
         <li><a href="https://www.facebook.com/p/SVS-RenoZ-Design-Build-61581168942198/" target="_blank" rel="noopener"><svg class="si" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.6 21.5v-8.2h2.8l.5-3.3h-3.3V7.9c0-1 .4-1.7 1.8-1.7H17V3.3c-.3 0-1.3-.2-2.5-.2-2.6 0-4.2 1.6-4.2 4.4V10H7.5v3.3h2.8v8.2z"/></svg>Facebook</a></li>
@@ -703,6 +730,21 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
     </div>
   </div>
 </footer>
+
+<div class="mp" id="mapDlg">
+  <div class="mp-bd" data-mp-close></div>
+  <div class="mp-panel" role="dialog" aria-modal="true" aria-labelledby="mpTitle" aria-describedby="mpAddr" tabindex="-1">
+    <h2 id="mpTitle" data-i18n="mp.title">Open address in</h2>
+    <p class="mp-addr" id="mpAddr" data-i18n="ct.addr">17-1, Jalan Tengah, Cheras Selatan 118, 43200 Cheras, Selangor</p>
+    <div class="mp-list">
+      <a class="mp-opt" data-app="google" target="_blank" rel="noopener" href="#" data-i18n="mp.google">Google Maps</a>
+      <a class="mp-opt" data-app="waze" target="_blank" rel="noopener" href="#" data-i18n="mp.waze">Waze</a>
+      <a class="mp-opt" data-app="apple" target="_blank" rel="noopener" href="#" data-i18n="mp.apple">Apple Maps</a>
+      <a class="mp-opt" data-app="other" rel="noopener" href="#" data-i18n="mp.other" hidden>Other map apps</a>
+    </div>
+    <button type="button" class="mp-cancel" data-mp-close data-i18n="mp.cancel">Cancel</button>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -804,9 +846,10 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
   };
   var ZH_X = {
     "menu.word":"菜单","ba.before":"装修前","ba.after":"装修后","ba.aria":"拖动对比装修前后：{name}",
-    "ft.big":"理想的家，从<b>一次对话</b>开始。"
+    "ft.big":"理想的家，从<b>一次对话</b>开始。",
+    "mp.title":"用以下应用打开地址","mp.google":"谷歌地图","mp.waze":"Waze","mp.apple":"苹果地图","mp.other":"其他地图应用","mp.cancel":"取消","mail.subj":"装修咨询"
   };
-  var EN_X = {"ba.before":"Before","ba.after":"After","ba.aria":"Drag to compare before and after: {name}"};
+  var EN_X = {"mail.subj":"Renovation enquiry","ba.before":"Before","ba.after":"After","ba.aria":"Drag to compare before and after: {name}"};
   for (var zk in ZH_X) ZH[zk]=ZH_X[zk];
   for (var ek in EN_X) EN_EXTRA[ek]=EN_X[ek];
   var VARIANT = "c";
@@ -958,6 +1001,54 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
     sticky.classList.toggle("show",past && !atContact);
   }
   window.addEventListener("scroll",onScroll,{passive:true}); window.addEventListener("resize",onScroll); onScroll();
+  /* Map chooser + mailto */
+  (function(){
+    var ADDR_ZH_NOTE=null, ADDR="17-1, Jalan Tengah, Cheras Selatan 118, 43200 Cheras, Selangor";
+    var ua=navigator.userAgent||"", isAnd=/Android/i.test(ua);
+    var isApple=!isAnd && (/iPhone|iPad|iPod|Macintosh|Mac OS X/i.test(ua) || (navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1));
+    var dlg=document.getElementById("mapDlg"), panel=dlg.querySelector(".mp-panel"), opener=null;
+    var qe=encodeURIComponent(ADDR);
+    var URLS={google:"https://www.google.com/maps/search/?api=1&query="+qe, waze:"https://waze.com/ul?q="+qe+"&navigate=yes", apple:"https://maps.apple.com/?q="+qe, other:"geo:0,0?q="+qe};
+    dlg.querySelectorAll("[data-app]").forEach(function(a){ a.href=URLS[a.getAttribute("data-app")]; });
+    dlg.querySelector('[data-app="apple"]').hidden=!isApple;
+    dlg.querySelector('[data-app="other"]').hidden=!isAnd;
+    function focusables(){ return Array.prototype.filter.call(panel.querySelectorAll("a[href],button"),function(e){return !e.hidden && e.offsetParent!==null;}); }
+    function place(){
+      if(!opener||window.innerWidth<=640){ panel.style.left=panel.style.top=""; return; }
+      var r=opener.getBoundingClientRect(), w=panel.offsetWidth, h=panel.offsetHeight, m=12;
+      var left=Math.max(m,Math.min(r.left,window.innerWidth-w-m));
+      var top=r.bottom+8; if(top+h>window.innerHeight-m) top=Math.max(m,r.top-h-8);
+      panel.style.left=left+"px"; panel.style.top=top+"px";
+    }
+    function open(el){
+      opener=el; dlg.classList.add("open"); document.documentElement.style.overflow=window.innerWidth<=640?"hidden":"";
+      place(); var f=focusables(); (f[0]||panel).focus();
+    }
+    function close(){
+      if(!dlg.classList.contains("open")) return;
+      dlg.classList.remove("open"); document.documentElement.style.overflow="";
+      var o=opener; opener=null; if(o) o.focus();
+    }
+    document.querySelectorAll("[data-map]").forEach(function(a){ a.addEventListener("click",function(e){ e.preventDefault(); open(a); }); });
+    dlg.querySelectorAll("[data-mp-close]").forEach(function(b){ b.addEventListener("click",close); });
+    dlg.querySelectorAll("[data-app]").forEach(function(a){ a.addEventListener("click",function(){ setTimeout(close,0); }); });
+    dlg.addEventListener("keydown",function(e){
+      if(e.key==="Escape"){ e.preventDefault(); close(); return; }
+      if(e.key!=="Tab") return;
+      var f=focusables(); if(!f.length) return;
+      var first=f[0], last=f[f.length-1], cur=document.activeElement;
+      if(e.shiftKey&&(cur===first||cur===panel)){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey&&cur===last){ e.preventDefault(); first.focus(); }
+      else if(!panel.contains(cur)){ e.preventDefault(); first.focus(); }
+    });
+    window.addEventListener("resize",place); window.addEventListener("scroll",place,{passive:true});
+    function mail(){
+      var h="mailto:svs.renoz@gmail.com?subject="+encodeURIComponent(t("mail.subj"));
+      document.querySelectorAll("[data-mail]").forEach(function(a){ a.setAttribute("href",h); });
+    }
+    mail();
+    new MutationObserver(mail).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+  })();
   start();
 })();
 </script>
