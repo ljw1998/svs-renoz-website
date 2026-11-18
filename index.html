@@ -337,6 +337,17 @@ html[lang="zh-Hans"] .tm.big blockquote{font-family:"Noto Sans SC",sans-serif;li
 .mp-opt[hidden]{display:none}
 .mp-cancel{width:100%;margin-top:8px;background:transparent}
 .mp :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.fm-list{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.fm-list li{position:relative;padding:10px 12px 10px 30px;border:1px solid rgba(240,160,144,.35);background:rgba(240,160,144,.07);border-radius:10px;font-size:.92rem;line-height:1.45;color:var(--bone)}
+.fm-list li::before{content:"";position:absolute;left:12px;top:1.1em;width:7px;height:7px;border-radius:50%;background:var(--err)}
+.fm-go{width:100%;justify-content:center}
+.fld.bad input,.fld.bad select,.fld.bad textarea{border-color:var(--err);box-shadow:0 0 0 3px rgba(240,160,144,.14)}
+.chk.bad{color:var(--err)}
+.chk.bad input{outline:2px solid var(--err);outline-offset:2px}
+.chk{flex-wrap:wrap}.chk .ferr{flex-basis:100%}
+.ferr{margin:0;font-size:.8rem;line-height:1.4;color:var(--err)}
+.ferr[hidden]{display:none}
+@media (min-width:641px){.mp.ctr .mp-panel{left:50%;top:50%;width:min(440px,calc(100vw - 24px));transform:translate(-50%,-46%)}.mp.ctr.open .mp-panel{transform:translate(-50%,-50%)}}
 @media (max-width:640px){
   .mp-panel{left:0!important;right:0;top:auto!important;bottom:0;width:auto;border-radius:22px 22px 0 0;border-width:1px 0 0;padding:12px var(--gr) calc(20px + env(safe-area-inset-bottom,0px)) var(--gl);opacity:1;transform:translateY(105%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
   .mp.open .mp-panel{transform:none}
@@ -364,17 +375,11 @@ html[lang="zh-Hans"] form.book h3{text-transform:none}
 .chk{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--muted)}
 .chk input{margin-top:4px;accent-color:var(--gold)}
 .sendrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
-.sendrow .hint{margin:0;font-size:.86rem;color:var(--muted)}
-.sendrow .hint[hidden]{display:none}
 .btn .wa{width:20px;height:20px;flex:none}
-form.book .btn[disabled]{opacity:.45;cursor:not-allowed;filter:saturate(.5)}
-form.book .btn[disabled]:hover{background:var(--gold)}
-form.book .btn[disabled]:hover .ar{transform:none}
-form.book .btn[disabled]:active{transform:none}
 .note{border:1px solid var(--ok);color:var(--ok);background:var(--char);padding:12px 14px;font-size:.92rem;border-radius:10px}
 .note.err{border-color:var(--err);color:var(--err)}
 @media (max-width:900px){.contact-g{grid-template-columns:1fr}}
-@media (max-width:520px){.frm{grid-template-columns:1fr}.sendrow{flex-direction:column;align-items:stretch}.sendrow .hint{text-align:center}form.book .btn{justify-self:stretch}}
+@media (max-width:520px){.frm{grid-template-columns:1fr}.sendrow{flex-direction:column;align-items:stretch}form.book .btn{justify-self:stretch}}
 
 /* Footer */
 .foot{border-top:1px solid var(--line);padding-block:clamp(56px,7vw,96px) calc(96px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:.92rem}
@@ -652,8 +657,7 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
         <label class="chk" for="fAgree"><input type="checkbox" id="fAgree"><span data-i18n="fm.agree">I agree that SVS RenoZ may contact me about my renovation.</span></label>
         <p class="note" id="formNote" role="status" hidden data-i18n="fm.wa">WhatsApp opened in a new tab. Send the message there and a consultant will reply.</p>
         <div class="sendrow">
-          <button type="submit" class="btn btn-gold" id="sendBtn" disabled aria-disabled="true"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 14.96L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15.03l-.3-.18-3.08.88.9-3-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.3c-.2 0-.5.07-.75.35-.25.27-.97.95-.97 2.3s1 2.7 1.13 2.88c.14.18 1.9 3.02 4.7 4.1 2.3.9 2.8.72 3.3.68.5-.05 1.6-.65 1.82-1.28.22-.63.22-1.17.16-1.28-.07-.12-.25-.18-.52-.32-.27-.13-1.6-.8-1.85-.88-.25-.1-.43-.14-.6.13-.18.27-.7.88-.86 1.06-.16.18-.32.2-.6.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.1-.18.05-.34-.02-.48-.07-.13-.6-1.5-.84-2.04-.2-.48-.43-.5-.6-.5z"/></svg><span data-i18n="fm.send">Send via WhatsApp</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <p class="hint" id="sendHint" data-i18n="fm.hint">Fill in all fields to continue</p>
+          <button type="submit" class="btn btn-gold" id="sendBtn"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 14.96L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15.03l-.3-.18-3.08.88.9-3-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.3c-.2 0-.5.07-.75.35-.25.27-.97.95-.97 2.3s1 2.7 1.13 2.88c.14.18 1.9 3.02 4.7 4.1 2.3.9 2.8.72 3.3.68.5-.05 1.6-.65 1.82-1.28.22-.63.22-1.17.16-1.28-.07-.12-.25-.18-.52-.32-.27-.13-1.6-.8-1.85-.88-.25-.1-.43-.14-.6.13-.18.27-.7.88-.86 1.06-.16.18-.32.2-.6.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.1-.18.05-.34-.02-.48-.07-.13-.6-1.5-.84-2.04-.2-.48-.43-.5-.6-.5z"/></svg><span data-i18n="fm.send">Send via WhatsApp</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
         </div>
       </form>
 <script>(function(){var d=document.querySelectorAll(".fld input[type=date]");function f(e){e.classList.toggle("is-empty",!e.value)}d.forEach(function(e){f(e);e.addEventListener("input",function(){f(e)});e.addEventListener("change",function(){f(e)})});var fm=document.getElementById("bookForm");if(fm)fm.addEventListener("reset",function(){setTimeout(function(){d.forEach(f)},0)})})();</script>
@@ -669,18 +673,78 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
   function v(n){return (fm.elements[n].value||"").trim()}
   function lab(n){var l=fm.elements[n].closest(".fld").querySelector("label");return l?l.textContent.trim().replace(/[?？]$/,""):n}
   function sel(n){var s=fm.elements[n];return s.value?s.options[s.selectedIndex].text.trim():""}
-  var btn=document.getElementById("sendBtn"), hint=document.getElementById("sendHint"), dEl=fm.elements["date"];
+  var btn=document.getElementById("sendBtn"), dEl=fm.elements["date"], agree=document.getElementById("fAgree");
   function pad(n){return (n<10?"0":"")+n}
-  function setMin(){var n=new Date();dEl.min=n.getFullYear()+"-"+pad(n.getMonth()+1)+"-"+pad(n.getDate())}
+  function todayStr(){var n=new Date();return n.getFullYear()+"-"+pad(n.getMonth()+1)+"-"+pad(n.getDate())}
+  function setMin(){dEl.min=todayStr()}
   setMin();
-  function ready(){return !!(v("name")&&v("type")&&v("area")&&v("scope")&&v("date")&&dEl.validity.valid&&document.getElementById("fAgree").checked)}
-  function sync(){var ok=ready();btn.disabled=!ok;btn.setAttribute("aria-disabled",ok?"false":"true");hint.hidden=ok}
-  ["input","change"].forEach(function(ev){fm.addEventListener(ev,sync)});
-  fm.addEventListener("reset",function(){setTimeout(sync,0)});
-  sync();
+  /* Typed and picked dates go through the same check: value must be a real yyyy-mm-dd (4-digit year) and not before today.
+     An incomplete typed date reads as "" in dEl.value, so it counts as not filled. Compared as strings, never via validity. */
+  function dateOk(){
+    var x=dEl.value, m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(x); if(!m) return false;
+    var dt=new Date(+m[1],+m[2]-1,+m[3]); if(dt.getFullYear()!==+m[1]||dt.getMonth()!==+m[2]-1||dt.getDate()!==+m[3]) return false;
+    return x>=todayStr();
+  }
+  var M={
+    en:{title:"A few details are missing",intro:"Please complete these before we open WhatsApp:",go:"Fill in now",
+        list:{name:"Your name",area:"Property location",type:"Property type",scope:"What to renovate",date:"Preferred visit date (choose today or a later date)",agree:"Tick the agreement box"},
+        inl:{name:"Please enter your name",area:"Please enter the property location",type:"Please choose a property type",scope:"Please choose what to renovate",date:"Choose today or a later date",agree:"Please tick the box to agree"}},
+    zh:{title:"还有几项资料未填写",intro:"请先补充以下内容，再打开 WhatsApp：",go:"现在填写",
+        list:{name:"您的姓名",area:"房产所在地区",type:"房产类型",scope:"想装修的部分",date:"希望见面的日期（请选择今天或之后的日期）",agree:"请勾选同意框"},
+        inl:{name:"请填写您的姓名",area:"请填写房产所在地区",type:"请选择房产类型",scope:"请选择想装修的部分",date:"请选择今天或之后的日期",agree:"请勾选同意框"}}};
+  var ORDER=["name","area","type","scope","date","agree"];
+  function okf(k){return k==="date"?dateOk():k==="agree"?agree.checked:!!v(k)}
+  function missing(){return ORDER.filter(function(k){return !okf(k)})}
+  function ctl(k){return k==="agree"?agree:fm.elements[k]}
+  function wrap(k){return k==="agree"?agree.closest(".chk"):fm.elements[k].closest(".fld")}
+  var flagged={};
+  function mark(k){
+    var w=wrap(k),c=ctl(k),e=w.querySelector(".ferr");
+    if(!e){e=document.createElement("p");e.className="ferr";e.id="err-"+k;w.appendChild(e)}
+    e.textContent=M[L()].inl[k];e.hidden=false;w.classList.add("bad");c.setAttribute("aria-invalid","true");c.setAttribute("aria-describedby",e.id);flagged[k]=1;
+  }
+  function unmark(k){
+    var w=wrap(k),c=ctl(k),e=w.querySelector(".ferr");
+    if(e)e.hidden=true;w.classList.remove("bad");c.removeAttribute("aria-invalid");c.removeAttribute("aria-describedby");delete flagged[k];
+  }
+  function recheck(){Object.keys(flagged).forEach(function(k){if(okf(k))unmark(k)})}
+  ["input","change","keyup","focusout"].forEach(function(ev){fm.addEventListener(ev,recheck)});
+  fm.addEventListener("reset",function(){setTimeout(function(){Object.keys(flagged).forEach(unmark)},0)});
+  new MutationObserver(function(){Object.keys(flagged).forEach(mark)}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+  /* in-page dialog */
+  var dlg,panel,goBtn,firstMissing=null,dlgReady=false;
+  function initDlg(){
+    if(dlgReady)return;dlgReady=true;
+    dlg=document.getElementById("fmDlg");panel=dlg.querySelector(".mp-panel");goBtn=document.getElementById("fmGo");
+    goBtn.addEventListener("click",function(){closeDlg(true)});
+    dlg.querySelectorAll("[data-fm-close]").forEach(function(b){b.addEventListener("click",function(){closeDlg(false)})});
+    dlg.addEventListener("keydown",function(e){
+      if(e.key==="Escape"){e.preventDefault();closeDlg(false);return}
+      if(e.key==="Tab"){e.preventDefault();goBtn.focus()}
+    });
+    document.addEventListener("focusin",function(e){if(dlg.classList.contains("open")&&!panel.contains(e.target))goBtn.focus()});
+  }
+  function closeDlg(toField){
+    if(!dlg.classList.contains("open"))return;
+    dlg.classList.remove("open");document.documentElement.style.overflow="";
+    var t=toField&&firstMissing?ctl(firstMissing):btn;
+    t.focus({preventScroll:!!toField});
+    if(toField&&firstMissing)wrap(firstMissing).scrollIntoView({block:"center",behavior:"auto"});
+  }
+  function openDlg(miss){
+    initDlg();
+    var m=M[L()];firstMissing=miss[0];
+    document.getElementById("fmTitle").textContent=m.title;document.getElementById("fmIntro").textContent=m.intro;goBtn.textContent=m.go;
+    var ul=document.getElementById("fmList");ul.textContent="";
+    miss.forEach(function(k){var li=document.createElement("li");li.textContent=m.list[k];ul.appendChild(li)});
+    dlg.classList.add("open");document.documentElement.style.overflow=window.innerWidth<=640?"hidden":"";
+    goBtn.focus();
+  }
   fm.addEventListener("submit",function(e){
     e.preventDefault();
-    sync();if(!ready())return;
+    var miss=missing();
+    Object.keys(flagged).forEach(unmark);
+    if(miss.length){miss.forEach(mark);var n=document.getElementById("formNote");if(n)n.hidden=true;openDlg(miss);return}
     var t=T[L()],lines=[t.intro];
     function add(id,val){if(val)lines.push(lab(id)+t.sep+val)}
     add("name",v("name"));add("type",sel("type"));add("area",v("area"));add("scope",sel("scope"));
@@ -730,6 +794,16 @@ html.reveal .rv:not(.in){opacity:.3;transform:translateY(20px)}
     </div>
   </div>
 </footer>
+
+<div class="mp ctr" id="fmDlg">
+  <div class="mp-bd" data-fm-close></div>
+  <div class="mp-panel" role="dialog" aria-modal="true" aria-labelledby="fmTitle" aria-describedby="fmIntro" tabindex="-1">
+    <h2 id="fmTitle"></h2>
+    <p class="mp-addr" id="fmIntro"></p>
+    <ul class="fm-list" id="fmList"></ul>
+    <button type="button" class="btn btn-gold fm-go" id="fmGo"></button>
+  </div>
+</div>
 
 <div class="mp" id="mapDlg">
   <div class="mp-bd" data-mp-close></div>
